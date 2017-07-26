@@ -3,9 +3,53 @@
 <Module specificationVersion='2'>
 	<ModulePrefs title="Xaq test from Git">
 	</ModulePrefs>
-	<Content type="html">
+	<!--Content type="html">
 		<![CDATA[
 			Hello, world from Gits!!!!!!
 		]]>
-	</Content>
+	</Content-->
+	
+	    <Content type = "html">
+        <![CDATA[
+            var tabset=new gadgets.TabSet();
+
+function onLoad(){ 
+
+    //align the tabset to the right of the gadget
+    tabset.alignTabs("right"); 
+
+    //add a tab
+    tabset.addTab("Tab1",{contentContainer:document.getElementById("tab1")});
+    //add a tab with a tooltip
+    tabset.addTab("Tab2",{contentContainer:document.getElementById("tab2"), tooltip:"tooltip"});
+    //insert a tab at the index 1. Specify a callback
+    tabset.addTab("Tab3",{contentContainer: document.getElementById("tab3"), callback: myCallback, index:1});
+
+    //swap the tab with index 1 and 2
+    tabset.swapTabs(1,2);
+
+    //display the tabs
+    tabset.displayTabs(true);
+
+    //remove the tab at the index 3
+    tabset.removeTab(3);
+
+    //select a tab and execute the callback
+    tabset.setSelectedTab(2);
+}
+
+//display information about the tab when it is selected.
+function myCallback {
+    var p = document.createElement("p");
+    var selectedTab = tabset.getSelectedTab();
+
+    var html += "TabName: " + selectedTab.getName();
+    p.innerHTML = html;
+    document.getElementById(tabId).appendChild(p);
+    gadgets.window.adjustHeight();
+}
+gadgets.util.registerOnLoadHandler(onLoad);
+        ]]>
+    </Content>
+	
 </Module>
